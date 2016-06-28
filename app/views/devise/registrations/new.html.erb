@@ -4,13 +4,20 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :attachment %>
+    <%= f.fields_for :attachment, Attachment.new do |image_form| %>
+      <%= image_form.file_field :image %>
+    <% end %>
+  </div>
+
+  <div class="field">
     <%= f.label :full_name %><br />
     <%= f.text_field :full_name, autofocus: true %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email %>
   </div>
 
   <div class="field">
