@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_posters, only: [:show]
   # GET /movies
   # GET /movies.json
   def index
@@ -67,6 +67,9 @@ class MoviesController < ApplicationController
       @movie = Movie.find(params[:id])
     end
 
+    def set_posters
+      @posters = @movie.posters
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
       params.require(:movie).permit(:title, :trailer, :description, :approved, :featured, posters_attributes: [:id, :image, :_destroy])
