@@ -12,4 +12,4 @@
 !/log/.keep
 /tmp
 /public/*
-/app/assets/images/medium/
+.byebug_history
