@@ -18,8 +18,8 @@
     <% @movies.each do |movie| %>
       <tr>
         <td><%= movie.title %></td>
-        <td><%= movie.trailer %></td>
-        <td><%= movie.description %></td>
+        <td><%= movie.show_trailer %></td>
+        <td><%= movie.show_desc %></td>
         <td><%= movie.approved %></td>
         <td><%= movie.featured %></td>
         <td><%= link_to 'Show', movie %></td>
