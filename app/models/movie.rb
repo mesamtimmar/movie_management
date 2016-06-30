@@ -15,4 +15,9 @@ class Movie < ActiveRecord::Base
   def actor_names
     self.actors.pluck(:name).join(', ')
   end
+
+  def duration_in_hour_minutes
+   seconds = duration.to_i * 60
+   Time.at(seconds).utc.strftime("%H:%M:%S")
+  end
 end
