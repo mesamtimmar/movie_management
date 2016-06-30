@@ -11,4 +11,8 @@ class Movie < ActiveRecord::Base
   def show_trailer
     self.trailer.to_s.html_safe
   end
+
+  def actor_names
+    self.actors.pluck(:name).join(', ')
+  end
 end
