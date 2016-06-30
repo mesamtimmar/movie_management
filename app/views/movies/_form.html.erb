@@ -38,6 +38,11 @@
   <% end %>
   <%= f.link_to_add "Add attachments", :posters %>
 
+  <div>
+    <%= f.label :actors %><br>
+    <%= f.select :actor_ids, options_from_collection_for_select(@all_actors, 'id', 'name', @selected_actors), {}, { multiple: true } %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
