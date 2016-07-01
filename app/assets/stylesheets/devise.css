@@ -6,6 +6,10 @@
   padding-top:100px;
 }
 
+.vertical-offset-50 {
+  padding-top: 50px;
+}
+
 .devise_buttons {
   width: 100px;
   margin-top: 10px;
