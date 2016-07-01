@@ -1,7 +1,7 @@
 class Attachment < ActiveRecord::Base
   has_attached_file :image,
                     styles: {
-                              medium: "300x300>",
+                              medium: "150x200#",
                               thumb: "100x100>"
                             },
                     default_url: ":style/missing.png"
