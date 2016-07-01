@@ -1,0 +1,14 @@
+.devise_pages {
+  background-color: #f2f2f2;
+}
+
+.vertical-offset-100 {
+  padding-top:100px;
+}
+
+.devise_buttons {
+  width: 100px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 100px;
+}
