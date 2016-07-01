@@ -20,4 +20,9 @@ class Movie < ActiveRecord::Base
    seconds = duration.to_i * 60
    Time.at(seconds).utc.strftime("%H:%M:%S")
   end
+
+  def top_poster
+    profile_picture = posters.first
+    profile_picture ? profile_picture.try(:image).url(:medium) : 'medium/missing_poster.png'
+  end
 end
