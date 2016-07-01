@@ -4,7 +4,7 @@ class Movie < ActiveRecord::Base
   has_many :casts
   has_many :actors, through: :casts
 
-  def show_desc
+  def show_description
     self.description.to_s.html_safe
   end
 
