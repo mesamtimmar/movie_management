@@ -1,0 +1,54 @@
+.movie_pages {
+  background-color: #f2f2f2;
+}
+
+.movie_caption {
+  font-family: Verdana;
+  font-size: 11px;
+  line-height: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.movie_description {
+  font-family: georgia,serif;
+  color: #381704;
+  font-size: 8px;
+  font-weight: normal;
+  line-height: 150%;
+  padding-left: 10px;
+}
+
+.hvr-float {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition-duration: 0.3s;
+  transition-property: transform;
+  transition-timing-function: ease-out;
+}
+.hvr-float:hover,
+.hvr-float:focus,
+.hvr-float:active {
+  transform: translateY(-8px);
+}
+
+.vertical-offset-100 {
+  padding-top:100px;
+}
+
+.update_button {
+  margin-left: 200px;
+}
+
+.center{
+  margin-top: 10px;
+}
+
+.navbar-custom {
+  margin-bottom: 100px;
+}

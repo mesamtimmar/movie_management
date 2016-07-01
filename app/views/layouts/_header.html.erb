@@ -1,14 +1,22 @@
-<% if user_signed_in? %>
-  <nav class="navbar navbar-inverse">
-   <div class="container-fluid">
-     <div class="navbar-header">
-       <%= link_to 'Movie Management System', movies_path, class: 'navbar-brand' %>
-     </div>
-     <ul class="nav navbar-nav">
-       <li class="active"><%= link_to "Logged in as #{current_user.email}" %></li>
-       <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
-       <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
-     </ul>
-   </div>
+<div class="navbar-custom">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <%= link_to 'Movie Management System', root_path, class: 'navbar-brand' %>
+      </div>
+      <% if user_signed_in? %>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to 'Add Movie', new_movie_path %></li>
+          <li class="active"><%= link_to "Logged in as #{current_user.email}" %></li>
+          <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
+          <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+        </ul>
+      <% else %>
+        <ul class="nav navbar-nav">
+          <li><%= link_to 'Sign in', new_user_session_path %></li>
+          <li><%= link_to 'Sign up', new_user_registration_path %></li>
+        </ul>
+      <% end %>
+    </div>
   </nav>
-<% end %>
+</div>
