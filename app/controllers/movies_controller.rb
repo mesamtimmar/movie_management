@@ -1,8 +1,8 @@
 class MoviesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :set_posters, only: [:show]
-  before_action :set_all_actors, only: [:new,:edit]
+  before_action :set_all_actors, only: [:new, :edit]
   before_action :set_selected_actors, only: [:edit, :update]
   # GET /movies
   # GET /movies.json
