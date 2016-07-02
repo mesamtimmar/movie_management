@@ -1,52 +1,54 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="col-md-12">
+    <div class="row">
 
-<p>
-  <strong>Title:</strong>
-  <%= @movie.title %>
-</p>
+      <div class="left-section">
+        <div class='options'>
+          <% if user_signed_in? %>
+            <%= link_to 'Edit', edit_movie_path(@movie), class: "btn btn-default" %> |
+            <%= link_to 'Destroy', @movie, class: "btn btn-default", method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </div>
 
-<p>
-  <strong>Genre:</strong>
-  <%= @movie.genre %>
-</p>
+        <h1><%= @movie.title %></h1>
 
-<p>
-  <strong>Duration:</strong>
-  <%= @movie.duration_in_hour_minutes %>
-</p>
+        <p><%= image_tag @movie.top_poster %></p>
 
-<p>
-  <strong>Release Date:</strong>
-  <%= @movie.release_date %>
-</p>
+        <div id="description">
+          <strong>Description:</strong>
+          <%= @movie.show_description %>
+        </div>
 
-<p>
-  <strong>Trailer:</strong>
-  <%= @movie.show_trailer %>
-</p>
+        <p>
+          <strong>Genre:</strong>
+          <%= @movie.genre %>
+        </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @movie.show_desc %>
-</p>
+        <p>
+          <strong>Duration:</strong>
+          <%= @movie.duration_in_hour_minutes %>
+        </p>
 
-<p>
-  <strong>Approved:</strong>
-  <%= @movie.approved %>
-</p>
+        <p>
+          <strong>Release Date:</strong>
+          <%= @movie.release_date %>
+        </p>
 
-<p>
-  <strong>Featured:</strong>
-  <%= @movie.featured %>
-</p>
+        <div id="cast">
+          <strong>Cast:</strong>
+          <p>
+            <%= @movie.actor_names %>
+          </p>
+        </div>
+      </div>
 
-<p>
-  <%= render partial: 'posters', collection: @posters, as: :poster %>
-</p>
+      <div class="right-section">
+        <%= @movie.show_trailer %>
 
-<p>
-  <%= @movie.actor_names %>
-</p>
-
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+        <div id="poster">
+          <%= render partial: 'posters', collection: @posters, as: :poster %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

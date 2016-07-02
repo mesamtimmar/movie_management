@@ -1,7 +1,7 @@
 <%= nested_form_for(@movie) do |f| %>
   <% if @movie.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+    <div id='error_explanation'>
+      <h2><%= pluralize(@movie.errors.count, 'error') %> prohibited this movie from being saved:</h2>
 
       <ul>
       <% @movie.errors.full_messages.each do |message| %>
@@ -11,51 +11,66 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class='form-group'>
+    <%= f.label :title %>
+    <%= f.text_field :title, placeholder: 'Title', class: 'form-control', required: true, maxlength: 150 %>
   </div>
-  <div class="field">
-    <%= f.label :genre %><br>
-    <%= f.text_field :genre %>
+
+  <div class='form-group'>
+    <%= f.label :genre %>
+    <%= f.text_field :genre, placeholder: 'Genre', class: 'form-control', required: true, maxlength: 30 %>
   </div>
-  <div class="field">
-    <%= f.label :duration %><br>
-    <%= f.number_field :duration %>
+
+  <div class='form-group'>
+    <%= f.label :duration %>
+    <%= f.number_field :duration, required: true, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :release_date %><br>
-    <%= f.date_field :release_date %>
+
+  <div class='form-group'>
+    <%= f.label :release_date %>
+    <%= f.date_field :release_date, required: true, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :trailer %><br>
-    <%= f.text_field :trailer %>
+
+  <div class='form-group'>
+    <%= f.label :trailer %>
+    <%= f.text_field :trailer, placeholder: 'Trailer Embed', class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.cktext_area :description %>
+
+  <div class='form-group'>
+    <%= f.label :description %>
+    <%= f.cktext_area :description, required: true, maxlength: 1200 %>
   </div>
-  <div class="field">
-    <%= f.label :approved %><br>
+
+  <div class='form-group'>
+    <%= f.label :approved %>
     <%= f.check_box :approved %>
   </div>
-  <div class="field">
-    <%= f.label :featured %><br>
+
+  <div class='form-group'>
+    <%= f.label :featured %>
     <%= f.check_box :featured %>
   </div>
 
   <%= f.fields_for :posters do |poster| %>
     <%= poster.file_field :image %>
-    <%= poster.link_to_remove "Remove item" %>
+    <%= poster.link_to_remove 'Remove item' %>
   <% end %>
-  <%= f.link_to_add "Add attachments", :posters %>
 
   <div>
-    <%= f.label :actors %><br>
+    <%= f.link_to_add 'Add posters of movie', :posters, class: 'btn btn-primary' %>
+  </div>
+
+  <div>
+    <%= f.label :add_actors_to_movie, class: 'center' %>
+  </div>
+
+  <div>
     <%= f.select :actor_ids, options_from_collection_for_select(@all_actors, 'id', 'name', @selected_actors), {}, { multiple: true } %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+    <div class='actions'>
+      <%= f.submit 'Submit', class: 'btn btn-success update_button' %>
+    </div>
   </div>
 <% end %>
