@@ -3,6 +3,10 @@ class Movie < ActiveRecord::Base
   accepts_nested_attributes_for :posters, allow_destroy: true
   has_many :casts
   has_many :actors, through: :casts
+  validates :title, presence: true, uniqueness: true, length: { maximum: 150 }
+  validates :genre, presence: true, length: { maximum: 30 }
+  validates :trailer, presence: true
+  validates :description, presence: true
 
   def show_description
     self.description.to_s.html_safe
