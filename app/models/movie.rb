@@ -25,8 +25,8 @@ class Movie < ActiveRecord::Base
    Time.at(seconds).utc.strftime("%H:%M:%S")
   end
 
-  def top_poster
+  def top_poster(style=:medium)
     profile_picture = posters.first
-    profile_picture ? profile_picture.try(:image).url(:medium) : 'medium/missing_poster.png'
+    profile_picture ? profile_picture.try(:image).url(style) : "#{style.to_s}/missing_poster.png"
   end
 end
