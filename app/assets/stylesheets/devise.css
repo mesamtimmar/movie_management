@@ -16,3 +16,15 @@
   margin-bottom: 20px;
   margin-left: 100px;
 }
+
+.footer-custom {
+  background-color: #0d0d0d;
+  color: white;
+  clear: both;
+  text-align: center;
+  padding: 5px;
+}
+
+.fixed-height {
+  min-height: 550px;
+}

@@ -7,8 +7,13 @@
       <% if user_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'Add Movie', new_movie_path %></li>
+
           <li class="active"><%= link_to "Logged in as #{current_user.email}" %></li>
+
+          <li><%= image_tag current_user.show_profile_picture(:medium), width: "35px", height:"50px"; %></li>
+
           <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
+
           <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
         </ul>
       <% else %>
