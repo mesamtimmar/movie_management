@@ -7,7 +7,8 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    @movies = Movie.with_category(params[:filter])
+    @movies = @movies.page(params[:page])
   end
 
   # GET /movies/1
