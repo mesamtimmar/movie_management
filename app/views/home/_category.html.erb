@@ -1,0 +1,16 @@
+<div class="categories">
+  <% movies.each do |movie| %>
+    <%= link_to movie do %>
+      <div class='thumbnail hvr-float'>
+        <%= image_tag movie.top_poster(:medium) %>
+
+        <div class='caption movie_caption'>
+          <%= movie.title %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="col-md-offset-5">
+  <%= link_to "View all", movies_path(filter: category), class: 'btn devise_buttons btn-default' %>
+</div>
