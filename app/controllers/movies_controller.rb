@@ -4,6 +4,7 @@ class MoviesController < ApplicationController
   before_action :set_posters, only: [:show]
   before_action :set_all_actors, only: [:new, :create, :edit, :update]
   before_action :set_selected_actors, only: [:edit, :update]
+
   # GET /movies
   # GET /movies.json
   def index
@@ -14,6 +15,8 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
+    @reviews = @movie.reviews.select(&:persisted?)
+    @review = @movie.reviews.build
   end
 
   # GET /movies/new

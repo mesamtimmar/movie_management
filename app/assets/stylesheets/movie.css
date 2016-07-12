@@ -53,15 +53,6 @@
   margin-bottom: 100px;
 }
 
-.left-section {
-  line-height: 30px;
-  height: 330px;
-  width: 400px;
-  float: left;
-  padding: 5px;
-  margin-right: 50px;
-}
-
 #description {
   border-bottom: 1px solid #ccc;
 }
@@ -80,12 +71,6 @@
   width: 43em;
   overflow-x: auto;
   white-space: nowrap;
-}
-.right-section {
-  margin-top: 20px;
-  width: 350px;
-  float: left;
-  padding: 10px;
 }
 
 .options {

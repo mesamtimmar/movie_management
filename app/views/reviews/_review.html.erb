@@ -1,0 +1,13 @@
+<li id="review-<%= review.id %>">
+  <div class="commenterImage">
+    <%= image_tag review.show_user_dp(:thumb) %>
+    <strong><%= review.user.full_name %></strong>
+  </div>
+
+  <div class="commentText col-md-offset-2">
+    <p><%= review.comment %></p>
+    <span class="date sub-text">
+      <%= review.created_at.to_date %>
+    </span>
+  </div>
+</li>
