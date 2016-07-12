@@ -1,13 +1,27 @@
 <li id="review-<%= review.id %>">
-  <div class="commenterImage">
-    <%= image_tag review.show_user_dp(:thumb) %>
-    <strong><%= review.user.full_name %></strong>
-  </div>
+  <div class='row col-md-12'>
+    <div class="col-md-1">
+      <div class="commenterImage">
+        <%= image_tag review.show_user_dp(:thumb) %>
+        <strong><%= review.user.full_name %></strong>
+      </div>
+    </div>
 
-  <div class="commentText col-md-offset-2">
-    <p><%= review.comment %></p>
-    <span class="date sub-text">
-      <%= review.created_at.to_date %>
-    </span>
+    <div class="col-md-8">
+      <div class="commentText">
+        <p><%= review.comment %></p>
+        <span class="date sub-text">
+          <%= review.created_at.to_date %>
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <% if user_signed_in? %>
+         <span><%= link_to 'Edit', edit_movie_review_path(@movie, review), remote: true %></span>|
+
+         <span><%= link_to 'Destroy', [@movie, review], method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></span>
+      <% end %>
+    </div>
   </div>
 </li>

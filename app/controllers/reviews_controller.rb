@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:update, :destroy]
+  before_action :set_review, only: [:update, :destroy, :edit]
   before_action :set_movie
 
   def create
@@ -16,8 +16,12 @@ class ReviewsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /reviews/1
-  # PATCH/PUT /reviews/1.json
+  def edit
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def update
     respond_to do |format|
       if @review.update(review_params)
@@ -25,15 +29,15 @@ class ReviewsController < ApplicationController
       else
         format.html { redirect_to @movie, alert: 'Review could not be updated.' }
       end
+      format.js
     end
   end
 
-  # DELETE /reviews/1
-  # DELETE /reviews/1.json
   def destroy
     @review.destroy
     respond_to do |format|
       format.html { redirect_to @movie, notice: 'Review was successfully destroyed.' }
+      format.js
     end
   end
 
