@@ -18,9 +18,18 @@
 
     <div class="col-md-2">
       <% if user_signed_in? %>
-         <span><%= link_to 'Edit', edit_movie_review_path(@movie, review), remote: true %></span>|
+        <% if review.owner?(current_user.id) %>
+          <span><%= link_to 'Edit', edit_movie_review_path(@movie, review), class: 'btn btn-xs btn-default', remote: true %></span>|
 
-         <span><%= link_to 'Destroy', [@movie, review], method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></span>
+          <span><%= link_to 'Destroy', [@movie, review], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger', remote: true %></span>
+
+        <% else %>
+          <% if review.reported_by?(current_user.id) %>
+            <div class='btn btn-xs btn-danger'>Reported</div>
+          <% else %>
+            <span id="report-<%= review.id %>"><%= link_to 'Report', review_reported_reviews_path(review), class: 'btn btn-xs btn-primary', remote: true, method: :post %></span>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>

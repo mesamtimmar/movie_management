@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+
   resources :movies do
     resources :reviews, only: [:create, :edit, :update, :destroy]
   end
   devise_for :users
+
+  resources :reviews, only: [] do
+    resources :reported_reviews, only: [:create]
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

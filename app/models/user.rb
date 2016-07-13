@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_one :attachment, as: :attachable
   accepts_nested_attributes_for :attachment
   has_many :reviews, dependent: :destroy
+  has_many :reported_reviews, dependent: :destroy
 
   def show_profile_picture(style = :original)
     profile_picture = self.attachment
