@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
   resources :movies do
     resources :ratings, only: [:edit, :create, :update, :destroy]
     resources :reviews, only: [:create, :edit, :update, :destroy]

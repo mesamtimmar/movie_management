@@ -15,3 +15,4 @@ actor_list = [
 actor_list.each do |name, gender, biography|
   Actor.create(name: name, gender: gender, biography: biography)
 end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
