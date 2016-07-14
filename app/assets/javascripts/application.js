@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require raty/jquery.raty.js
 //= require turbolinks
 //= require ckeditor/init
 //= require jquery_nested_form

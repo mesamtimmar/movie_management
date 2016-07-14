@@ -17,6 +17,12 @@ class MoviesController < ApplicationController
   def show
     @reviews = @movie.reviews.select(&:persisted?)
     @review = @movie.reviews.build
+    @ratings = @movie.ratings
+    @rating = @movie.get_ratings(current_user) if user_signed_in?
+    respond_to do |format|
+      format.html
+      format.json { render json: @movie }
+    end
   end
 
   # GET /movies/new

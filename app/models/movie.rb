@@ -5,6 +5,7 @@ class Movie < ActiveRecord::Base
   has_many :casts
   has_many :actors, through: :casts, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :ratings, dependent: :destroy
   validates :title, presence: true, uniqueness: true, length: { maximum: 150 }
   validates :genre, presence: true, length: { maximum: 30 }
   validates :trailer, presence: true
@@ -36,5 +37,13 @@ class Movie < ActiveRecord::Base
 
   def self.with_category(params)
     params == "latest" ? Movie.latest_movies : Movie.featured_movies
+  end
+
+  def get_average_rating
+    self.ratings.present? ? self.ratings.average(:score) : 0
+  end
+
+  def get_ratings(user)
+    user.ratings.for_movie(self).first || user.ratings.build(movie: self)
   end
 end

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :ratings, only: [:create, :update, :destroy]
   resources :movies do
+    resources :ratings, only: [:edit, :create, :update, :destroy]
     resources :reviews, only: [:create, :edit, :update, :destroy]
   end
   devise_for :users
