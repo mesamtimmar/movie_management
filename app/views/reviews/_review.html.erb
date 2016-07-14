@@ -7,12 +7,13 @@
       </div>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-8" id="comment-<%= review.id %>">
       <div class="commentText">
-        <p><%= review.comment %></p>
-        <span class="date sub-text">
-          <%= review.created_at.to_date %>
-        </span>
+        <p><%= review.comment %>
+          <span class="date sub-text">
+            <%= review.created_at.to_date %>
+          </span>
+        </p>
       </div>
     </div>
 
