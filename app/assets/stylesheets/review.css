@@ -49,3 +49,7 @@
   border-top: 1px dotted #bbb;
   padding: 10px;
 }
+
+#review_error {
+  display: none;
+}

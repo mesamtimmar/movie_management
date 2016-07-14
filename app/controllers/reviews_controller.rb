@@ -3,11 +3,12 @@ class ReviewsController < ApplicationController
   before_action :set_movie
 
   def create
-    @review = @movie.reviews.new(review_params)
-    @review.user_id = current_user.id
+    @created_review = @movie.reviews.new(review_params)
+    @created_review.user_id = current_user.id
+    @review = @movie.reviews.build
 
     respond_to do |format|
-      if @review.save
+      if @created_review.save
         format.html { redirect_to @movie, notice: 'Review was successfully created.' }
       else
         format.html { redirect_to @movie, alert: 'Review could not be created.' }
