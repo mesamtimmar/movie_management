@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :reported_reviews, dependent: :destroy
   has_many :ratings, dependent: :destroy
+  validates :email, presence: true, uniqueness: true, length: { maximum: 100 }
+  validates :full_name, presence: true, length: { maximum: 50 }
 
   def show_profile_picture(style = :original)
     profile_picture = self.attachment

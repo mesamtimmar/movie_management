@@ -15,11 +15,11 @@
     </div>
 
     <div class="form-group">
-      <%= f.text_field :full_name, placeholder: "Full Name", class: "form-control", autofocus: true %>
+      <%= f.text_field :full_name, placeholder: 'Full Name', maxlength: 50, class: 'form-control', autofocus: true %>
     </div>
 
     <div class="form-group">
-      <%= f.email_field :email, placeholder: "Email", class: "form-control" %>
+      <%= f.email_field :email, placeholder: 'Email', maxlength: 100, class: 'form-control' %>
     </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -27,15 +27,15 @@
     <% end %>
 
     <div class="form-group">
-      <%= f.password_field :password, placeholder: "Password  (only if you want to change)", class: "form-control", autocomplete: "off" %>
+      <%= f.password_field :password, placeholder: 'Password  (only if you want to change)', maxlength: 50, class: 'form-control', autocomplete: "off" %>
     </div>
 
     <div class="form-group">
-      <%= f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control", autocomplete: "off" %>
+      <%= f.password_field :password_confirmation, placeholder: 'Confirm Password', maxlength: 50, class: 'form-control', autocomplete: "off" %>
     </div>
 
     <div class="form-group">
-      <%= f.password_field :current_password, placeholder: "Current Password (to confirm your changes)", required: true, class: "form-control", autocomplete: "off" %>
+      <%= f.password_field :current_password, placeholder: 'Current Password (to confirm your changes)', maxlength: 50, required: true, class: 'form-control', autocomplete: "off" %>
     </div>
 
     <div class="actions">
