@@ -52,8 +52,11 @@
   </div>
 
   <%= f.fields_for :posters do |poster| %>
-    <%= poster.file_field :image %>
-    <%= poster.link_to_remove 'Remove item' %>
+    <% unless poster_present?(poster) %>
+      <div><%= image_tag poster.object.image.url(:thumb) %></div>
+    <% end %>
+    <div><%= poster.file_field :image %></div>
+    <%= poster.link_to_remove '', class: 'btn btn-xs btn-danger margin glyphicon glyphicon-remove' %>
   <% end %>
 
   <div>
