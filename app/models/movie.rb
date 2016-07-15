@@ -12,6 +12,7 @@ class Movie < ActiveRecord::Base
   validates :description, presence: true
   scope :latest_movies, -> { order ("release_date DESC") }
   scope :featured_movies, -> { where(featured: true) }
+  GENRE = %w(Crime Action Thriller Romance Horror)
 
   def show_description
     self.description.to_s.html_safe
