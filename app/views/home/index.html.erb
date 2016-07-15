@@ -1,5 +1,21 @@
-<h1>Featured</h1>
-<%= render 'category', movies: @featured, category: 'featured' %>
+<div class="row">
+  <div class="col-md-2"></div>
 
-<h1>Latest</h1>
-<%= render 'category', movies: @latest, category: 'latest' %>
+  <div class="col-md-8">
+    <div class="row">
+      <div class='col-md-12'>
+        <h1>Featured</h1>
+        <%= render 'category', movies: @featured, category: 'featured' %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class='col-md-12'>
+        <h1>Latest</h1>
+        <%= render 'category', movies: @latest, category: 'latest' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2"></div>
+</div>
