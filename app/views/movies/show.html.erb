@@ -1,16 +1,9 @@
 <div class="row">
 
   <div class="col-md-4 col-md-offset-1" id="movie-container" data-movie="<%= @movie.id %>" data-rating="<%= @rating.id if user_signed_in? %>">
-    <div class='options'>
-      <% if user_signed_in? %>
-        <%= link_to 'Edit', edit_movie_path(@movie), class: "btn btn-default" %> |
-        <%= link_to 'Destroy', @movie, class: "btn btn-default", method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-    </div>
+    <%= image_tag @movie.top_poster(:medium) %>
 
     <h1><%= @movie.title %></h1>
-
-    <p><%= image_tag @movie.top_poster(:medium) %></p>
 
     <div class='avg-star-rating' data-score=<%= @movie.get_average_rating %> ></div>
 
@@ -88,5 +81,18 @@
         </ul>
       </div>
     </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='options'>
+    <% if user_signed_in? %>
+      <div class='col-md-1 col-md-offset-1'>
+        <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-default' %>
+      </div>
+      <div class='col-md-1'>
+        <%= button_to 'Destroy Movie', @movie, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger' %>
+      </div>
+    <% end %>
   </div>
 </div>

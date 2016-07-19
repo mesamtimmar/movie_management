@@ -18,9 +18,7 @@
 
   <div class='form-group'>
     <%= f.label :genre %>
-    <div class='clearfix'>
-      <%= f.select :genre, options_for_select(Movie::GENRE, selected: @movie.genre), class: 'form-control' %>
-    </div>
+    <%= f.select :genre, options_for_select(Movie::GENRE, selected: @movie.genre), class: 'form-control' %>
   </div>
 
   <div class='form-group'>
@@ -46,9 +44,7 @@
   <div class='form-group'>
     <%= f.label :approved %>
     <%= f.check_box :approved %>
-  </div>
 
-  <div class='form-group'>
     <%= f.label :featured %>
     <%= f.check_box :featured %>
   </div>
@@ -62,7 +58,7 @@
   <% end %>
 
   <div>
-    <%= f.link_to_add 'Add posters of movie', :posters, class: 'btn btn-primary' %>
+    <%= f.link_to_add 'Add posters of movie', :posters, class: 'btn btn-success' %>
   </div>
 
   <div>
@@ -75,7 +71,7 @@
 
   <div>
     <div class='actions'>
-      <%= f.submit 'Submit', class: 'btn btn-success update_button' %>
+      <%= f.submit 'Submit', class: 'btn btn-primary btn-block' %>
     </div>
   </div>
 <% end %>
