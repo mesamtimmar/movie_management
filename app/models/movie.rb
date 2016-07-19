@@ -49,4 +49,8 @@ class Movie < ActiveRecord::Base
   def get_ratings(user)
     user.ratings.for_movie(self).first || user.ratings.build(movie: self)
   end
+
+  def added_to_favorites_by?(user_id)
+    Favorite.exists?(user_id: user_id, movie_id: self.id)
+  end
 end

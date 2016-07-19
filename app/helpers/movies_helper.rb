@@ -6,4 +6,8 @@ module MoviesHelper
   def poster_present?(poster)
     poster.object.image.url(:thumb) == 'thumb/missing.png'
   end
+
+  def favorite_button_id(movie, user)
+    ['favorite', movie.id, user.id].join
+  end
 end
