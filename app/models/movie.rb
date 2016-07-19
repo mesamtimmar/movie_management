@@ -6,6 +6,8 @@ class Movie < ActiveRecord::Base
   has_many :actors, through: :casts, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :ratings, dependent: :destroy
+  has_many :favorites
+
   validates :title, presence: true, uniqueness: true, length: { maximum: 150 }
   validates :genre, presence: true, length: { maximum: 30 }
   validates :trailer, presence: true
