@@ -1,98 +1,105 @@
-<div class="row">
-
-  <div class="col-md-4 col-md-offset-1" id="movie-container" data-movie="<%= @movie.id %>" data-rating="<%= @rating.id if user_signed_in? %>">
-    <%= image_tag @movie.top_poster(:medium) %>
-
-    <h1><%= @movie.title %></h1>
-
-    <div class='avg-star-rating' data-score=<%= @movie.get_average_rating %> ></div>
-
-    <% if user_signed_in? %>
-      <div class="btn btn-xs btn-default" id="rate">Rate this</div>
-
-      <div id="rater" class='star-rating' data-score=<%= @rating.score %>></div>
-
-      <% if @movie.added_to_favorites_by?(current_user.id) %>
-        <div class='btn btn-xs btn-success'>Favorite</div>
-      <% else %>
-        <span id="<%= favorite_button_id(@movie, current_user) %>">
-          <%= link_to 'Add to Favorites+', user_favorites_path(current_user.id, movie_id: @movie.id), remote: true, class: 'btn btn-xs btn-primary', method: :post %>
-        </span>
-      <% end %>
-    <% else %>
-      <%= link_to 'Sign in to Rate', new_user_session_path, class:'btn btn-xs btn-default' %>
-    <% end %>
-
-    <div id="description">
-      <strong>Description:</strong>
-      <%= @movie.show_description %>
-    </div>
-
-    <p>
-      <strong>Genre:</strong>
-      <%= @movie.genre %>
-    </p>
-
-    <p>
-      <strong>Duration:</strong>
-      <%= @movie.duration_in_hour_minutes %>
-    </p>
-
-    <p>
-      <strong>Release Date:</strong>
-      <%= formated_date(@movie.release_date) %>
-    </p>
-
-    <div id="cast">
-      <strong>Cast:</strong>
-      <p><%= @movie.actor_names %></p>
-    </div>
-  </div>
-
-  <div class="col-md-7">
-    <%= @movie.show_trailer %>
-
-    <div id="poster">
-      <%= render partial: 'posters', collection: @posters, as: :poster %>
-    </div>
-  </div>
-</div>
-
-<% if user_signed_in? %>
-  <div class="row">
-    <div class="col-md-11 col-md-offset-1">
-      <div id="review-container">
-        <%= render 'reviews/form' %>
-      </div>
-    </div>
-  </div>
-<% end %>
-
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <div id="movie-reviews">
-      <div class="titleBox">
-        <label>Reviews</label>
-      </div>
-
-      <div class="actionBox">
-        <ul class="commentList" id="review-list">
-          <%= render @reviews %>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class='row'>
-  <div class='options'>
-    <% if user_signed_in? %>
-      <div class='col-md-1 col-md-offset-1'>
-        <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-default' %>
+  <div class='col-md-2'></div>
+
+  <div class='col-md-8'>
+    <div class='row'>
+      <div class='col-md-4' id='movie-container' data-movie="<%= @movie.id %>" data-rating="<%= set_to_rating_id(@rating) %>">
+        <%= image_tag @movie.top_poster(:medium) %>
+
+        <h1><%= @movie.title %></h1>
+
+        <div class='avg-star-rating' data-score=<%= @movie.get_average_rating %> ></div>
+
+        <% if user_signed_in? %>
+          <div class='btn btn-xs btn-default' id='rate'>Rate this</div>
+
+          <div id='rater' class='star-rating' data-score=<%= @rating.score %>></div>
+
+          <% if @movie.added_to_favorites_by?(current_user.id) %>
+            <div class='btn btn-xs btn-success'>Favorite</div>
+          <% else %>
+            <span id="<%= favorite_button_id(@movie, current_user) %>">
+              <%= link_to 'Add to Favorites+', user_favorites_path(current_user.id, movie_id: @movie.id), remote: true, class: 'btn btn-xs btn-primary', method: :post %>
+            </span>
+          <% end %>
+        <% else %>
+          <%= link_to 'Sign in to Rate', new_user_session_path, class:'btn btn-xs btn-default' %>
+        <% end %>
+
+        <div id='description'>
+          <strong>Description:</strong>
+          <%= @movie.show_description %>
+        </div>
+
+        <p>
+          <strong>Genre:</strong>
+          <%= @movie.genre %>
+        </p>
+
+        <p>
+          <strong>Duration:</strong>
+          <%= @movie.duration_in_hour_minutes %>
+        </p>
+
+        <p>
+          <strong>Release Date:</strong>
+          <%= formated_date(@movie.release_date) %>
+        </p>
+
+        <div id='cast'>
+          <strong>Cast:</strong>
+          <p><%= @movie.actor_names %></p>
+        </div>
       </div>
-      <div class='col-md-1'>
-        <%= button_to 'Destroy Movie', @movie, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger' %>
+
+      <div class='col-md-8'>
+        <%= @movie.show_trailer %>
+
+        <div id='poster'>
+          <%= render partial: 'posters', collection: @posters, as: :poster %>
+        </div>
+      </div>
+    </div>
+
+    <% if user_signed_in? %>
+      <div class='row'>
+        <div class='col-md-12'>
+          <div id='review-container'>
+            <%= render 'reviews/form' %>
+          </div>
+        </div>
       </div>
     <% end %>
+
+    <div class='row'>
+      <div class='col-md-12'>
+        <div id='movie-reviews'>
+          <div class='titleBox'>
+            <label>Reviews</label>
+          </div>
+
+          <div class='actionBox'>
+            <ul class='commentList' id='review-list'>
+              <%= render @reviews %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='options'>
+        <% if user_signed_in? %>
+          <div class='col-md-1'>
+            <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-default' %>
+          </div>
+          <div class='col-md-1'>
+            <%= button_to 'Destroy Movie', @movie, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
+
+  <div class='col-md-2'></div>
 </div>
