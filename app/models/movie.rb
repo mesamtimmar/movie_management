@@ -14,6 +14,8 @@ class Movie < ActiveRecord::Base
   validates :description, presence: true
   scope :latest_movies, -> { order ("release_date DESC") }
   scope :featured_movies, -> { where(featured: true) }
+  scope :top_rated, -> { eager_load(:ratings, :posters).group('ratings.movie_id').order('AVG(ratings.score) DESC') }
+
   GENRE = %w(Crime Action Thriller Romance Horror)
 
   def show_description
@@ -39,7 +41,15 @@ class Movie < ActiveRecord::Base
   end
 
   def self.with_category(params)
-    params == "latest" ? Movie.latest_movies : Movie.featured_movies
+    if params == 'latest'
+      Movie.latest_movies
+    elsif params == 'featured'
+      Movie.featured_movies
+    elsif params == 'top_rated_movies'
+      Movie.top_rated
+    else
+      Movie.all
+    end
   end
 
   def get_average_rating

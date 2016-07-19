@@ -15,6 +15,13 @@
         <%= render 'category', movies: @latest, category: 'latest' %>
       </div>
     </div>
+
+    <div class="row">
+      <div class='col-md-12'>
+        <h1>Top</h1>
+        <%= render 'category', movies: @top_rated_movies, category: 'top_rated_movies' %>
+      </div>
+    </div>
   </div>
 
   <div class="col-md-2"></div>
