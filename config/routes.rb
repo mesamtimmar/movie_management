@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     resources :reported_reviews, only: [:create]
   end
 
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    resources :favorites, only: [:create, :destroy]
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
