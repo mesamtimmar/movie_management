@@ -13,7 +13,7 @@ class Movie < ActiveRecord::Base
   validates :trailer, presence: true
   validates :description, presence: true
   scope :latest_movies, -> { order ("release_date DESC") }
-  scope :featured_movies, -> { where(featured: true) }
+  scope :featured_movies, -> { includes(:posters).where(featured: true).order ('updated_at DESC') }
   scope :top_rated, -> { eager_load(:ratings, :posters).group('ratings.movie_id').order('AVG(ratings.score) DESC') }
 
   GENRE = %w(Crime Action Thriller Romance Horror)
