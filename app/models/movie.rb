@@ -1,4 +1,6 @@
 class Movie < ActiveRecord::Base
+  DEFAULT_SEARCH_FILTER = { approved: true }
+  DEFAULT_SEARCH_ORDER = 'updated_at DESC'
   include ThinkingSphinx::Scopes
   paginates_per 12
   has_many :posters, class_name: "Attachment", as: :attachable, dependent: :destroy
@@ -7,7 +9,7 @@ class Movie < ActiveRecord::Base
   has_many :actors, through: :casts, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :ratings, dependent: :destroy
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
 
   validates :title, presence: true, uniqueness: true, length: { maximum: 150 }
   validates :genre, presence: true, length: { maximum: 30 }
@@ -100,5 +102,27 @@ class Movie < ActiveRecord::Base
     return Date.today..starting if starting.present?
     return Date.today..ending if ending.present? && ending > Date.today
     []
+  end
+
+  def details_hash
+   {
+     id: id,
+     genre: genre,
+     description: description,
+     actors: actors.pluck(:id, :name, :biography, :gender, :created_at, :updated_at),
+     reviews: reviews.pluck(:id, :user_id, :comment, :created_at, :updated_at, :report_count),
+     ratings: ratings.pluck(:id, :score, :created_at, :updated_at, :user_id),
+   }
+ end
+
+  def self.search_movie(params)
+    conditions = {
+      title: params[:title],
+      genre: params[:genre],
+      actors: params[:actors],
+      release_date: params[:release_date]
+    }
+
+    Movie.search(conditions: conditions, with: DEFAULT_SEARCH_FILTER, order: DEFAULT_SEARCH_ORDER)
   end
 end
