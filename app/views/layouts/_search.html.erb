@@ -1,0 +1,6 @@
+<%= form_tag movies_path, method: :get, class: 'form-inline' do %>
+  <div id='header_search' class='form-group'>
+    <%= text_field_tag :search, params[:search], class: 'form-control', id: 'search_bar', placeholder: 'Search Movies' %>
+    <%= submit_tag 'Search', class: 'btn btn-default', id: 'search_btn' %>
+  </div>
+<% end %>

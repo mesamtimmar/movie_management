@@ -4,9 +4,13 @@
       <div class="navbar-header">
         <%= link_to 'Home', root_path, class: 'navbar-brand' %>
       </div>
-      <% if user_signed_in? %>
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to 'Add Movie', new_movie_path, class: 'btn-xs btn-default' %></li>
+      <ul class='nav navbar-nav navbar-right'>
+        <li><%= render 'layouts/search' %></li>
+        <% if movie_index_page? %>
+          <li><%= link_to 'Advance Search', '#', id: 'advance_search_btn' %></li>
+        <% end %>
+        <% if user_signed_in? %>
+          <li><%= button_to 'Add Movie', new_movie_path, method: :get, class: 'btn btn-primary header-btn' %></li>
 
           <li><%= link_to current_user.full_name, user_path(current_user) %></li>
 
@@ -15,14 +19,15 @@
           <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
 
           <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
-        </ul>
-      <% else %>
-        <ul class='nav navbar-nav navbar-right'>
+        <% else %>
           <li><%= link_to 'Sign in', new_user_session_path %></li>
+
           <li><%= link_to 'Sign up', new_user_registration_path %></li>
+
            <li><%= link_to 'Admin Sign in', new_admin_user_session_path %></li>
-        </ul>
-      <% end %>
+        <% end %>
+      </ul>
     </div>
   </nav>
+
 </div>

@@ -58,7 +58,7 @@
   margin-bottom: 100px;
 }
 
-#description {
+#description_of_movie {
   margin-top: 10px;
   border-bottom: 1px solid #ccc;
 }
@@ -83,4 +83,16 @@
 
 #rater {
   display: none;
+}
+
+#advance_search_form {
+  display: none;
+}
+
+.margin-top-class-10 {
+  margin-top: 10px;
+}
+
+.link_color {
+    color: #fff !important;
 }

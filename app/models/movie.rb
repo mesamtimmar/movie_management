@@ -1,4 +1,5 @@
 class Movie < ActiveRecord::Base
+  include ThinkingSphinx::Scopes
   paginates_per 12
   has_many :posters, class_name: "Attachment", as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :posters, allow_destroy: true
@@ -15,6 +16,17 @@ class Movie < ActiveRecord::Base
   scope :latest_movies, -> { order ("release_date DESC") }
   scope :featured_movies, -> { includes(:posters).where(featured: true).order ('updated_at DESC') }
   scope :top_rated, -> { eager_load(:ratings, :posters).group('ratings.movie_id').order('AVG(ratings.score) DESC') }
+  scope :approved, -> { where(approved: true) }
+
+  sphinx_scope(:latest) {
+    { order: 'release_date DESC' }
+  }
+  sphinx_scope(:approved) {
+    { with: { approved: true } }
+  }
+  sphinx_scope(:featured) {
+    { with: { featured: true} }
+  }
 
   GENRE = %w(Crime Action Thriller Romance Horror)
 
@@ -62,5 +74,31 @@ class Movie < ActiveRecord::Base
 
   def added_to_favorites_by?(user_id)
     Favorite.exists?(user_id: user_id, movie_id: self.id)
+  end
+
+  def self.search_movies(params)
+    conditions =  {
+                   conditions: {},
+                   with: {},
+                   order: 'release_date DESC',
+                  }
+
+    conditions[:conditions][:genre] = params[:genre] if params[:genre].present?
+    conditions[:conditions][:actors] = params[:actors] if params[:actors].present?
+    conditions[:conditions][:description] = params[:description] if params[:description].present?
+    conditions[:with][:release_date] = date_range(params[:start_date], params[:end_date])
+
+    search params[:search], conditions
+  end
+
+  def self.date_range(start_date, end_date)
+    starting = start_date.to_s.to_time
+    ending = end_date.to_s.to_time
+
+    return starting..ending if starting.present? && ending.present?
+    return starting..Date.today if starting.present? && starting < Date.today
+    return Date.today..starting if starting.present?
+    return Date.today..ending if ending.present? && ending > Date.today
+    []
   end
 end

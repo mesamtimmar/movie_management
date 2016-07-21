@@ -1,29 +1,34 @@
-<div class="row">
-  <div class="col-md-2"></div>
+<div class='row'>
 
-  <div class="col-md-8">
-    <h1>Listing Movies</h1>
-    <div class="row">
-      <% @movies.each do |movie| %>
-        <div class='col-sm-3 col-lg-3 col-md-3'>
-          <%= link_to movie do %>
-            <div class='thumbnail hvr-float'>
-              <p><%= image_tag movie.top_poster(:medium), class:'poster-image' %></p>
+  <div class='col-md-8 col-md-offset-2'>
+    <div class='row'>
+      <div class='col-md-12'>
+        <div id='advance_search_form'>
+          <%= render 'layouts/advance_search' %>
+        </div>
+      </div>
+    </div>
 
-              <div class='caption movie_caption'>
-                <%= movie.title %>
-              </div>
+    <div class='row'>
+      <div class='col-md-12'>
+        <h1>Listing Movies</h1>
+        <div class="row">
+          <% @movies.each do |movie| %>
+            <div class='col-sm-3'>
+              <%= link_to movie do %>
+                <div class='thumbnail hvr-float'>
+                  <p><%= image_tag movie.top_poster(:medium), class:'poster-image' %></p>
 
-              <div class='movie_description'>
-                <%= movie.show_description %>
-              </div>
+                  <div class='caption movie_caption'>
+                    <%= movie.title %>
+                  </div>
+                </div>
+              <% end %>
             </div>
           <% end %>
         </div>
-      <% end %>
+        <%= paginate @movies %>
+      </div>
     </div>
-    <%= paginate @movies %>
   </div>
-
-  <div class="col-md-2"></div>
 </div>
