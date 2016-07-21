@@ -31,6 +31,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'kaminari'
 gem 'activeadmin', '~> 1.0.0.pre4'
+gem 'thinking-sphinx'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
