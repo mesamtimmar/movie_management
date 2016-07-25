@@ -26,16 +26,6 @@
           <%= link_to 'Sign in to Rate', new_user_session_path, class:'btn btn-xs btn-default' %>
         <% end %>
 
-        <div id='description'>
-          <strong>Description:</strong>
-          <%= @movie.show_description %>
-        </div>
-
-        <p>
-          <strong>Genre:</strong>
-          <%= @movie.genre %>
-        </p>
-
         <p>
           <strong>Duration:</strong>
           <%= @movie.duration_in_hour_minutes %>
@@ -58,6 +48,17 @@
         <div id='poster'>
           <%= render partial: 'posters', collection: @posters, as: :poster %>
         </div>
+
+        <div class='clearfix'></div>
+        <p>
+          <strong>Genre:</strong>
+          <%= @movie.genre %>
+        </p>
+
+        <p>
+          <strong>Description:</strong>
+          <%= @movie.show_description %>
+        </p>
       </div>
     </div>
 

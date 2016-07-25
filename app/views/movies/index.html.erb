@@ -19,9 +19,11 @@
                 <div class='thumbnail hvr-float'>
                   <p><%= image_tag movie.top_poster(:medium), class:'poster-image' %></p>
 
-                  <div class='caption movie_caption'>
+                  <div class='caption movie-caption text-center'>
                     <%= movie.title %>
                   </div>
+
+                  <div class='avg-star-rating text-center' data-score=<%= movie.get_average_rating %> ></div>
                 </div>
               <% end %>
             </div>
