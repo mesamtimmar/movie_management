@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
   protect_from_forgery with: :exception
   before_action :configure_sign_up_params, if: :devise_controller?
   before_action :configure_account_update_params, if: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
-
   private
 
   def configure_permitted_parameters
@@ -18,5 +18,9 @@ class ApplicationController < ActionController::Base
 
   def configure_account_update_params
     devise_parameter_sanitizer.for(:account_update) << :full_name
+  end
+
+  def not_found
+    redirect_to root_path, alert: ' Record Not Found, Try again'
   end
 end
