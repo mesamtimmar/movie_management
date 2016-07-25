@@ -1,5 +1,6 @@
 ActiveAdmin.register User do
   permit_params :email, :password
+  actions :all, except: [:edit, :destroy]
 
   index do
     column :email
