@@ -53,7 +53,7 @@ ActiveAdmin.register Movie do
       f.input :featured
       f.input :duration
       f.input :genre, as: :select, collection: Movie::GENRE
-      f.input :release_date
+      f.input :release_date, as: :datepicker
       f.input :actors
       f.has_many :posters, heading: 'Posters', new_record: 'Add Poster' do |attachment|
         attachment.input :image, hint: attachment.template.image_tag(attachment.object.image.url(:medium)), allow_destroy: true
