@@ -4,6 +4,7 @@ class MoviesController < ApplicationController
   before_action :set_posters, only: [:show]
   before_action :set_all_actors, only: [:new, :create, :edit, :update]
   before_action :set_selected_actors, only: [:edit, :update]
+  before_action :authenticate_movie, only: [:show]
 
   # GET /movies
   # GET /movies.json
@@ -98,5 +99,9 @@ class MoviesController < ApplicationController
 
     def set_selected_actors
       @selected_actors = @movie.actor_ids
+    end
+
+    def authenticate_movie
+      redirect_to root_path, alert: 'Movie not approved' unless @movie.approved?
     end
 end
