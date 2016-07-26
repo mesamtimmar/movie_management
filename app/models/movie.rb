@@ -22,8 +22,8 @@ class Movie < ActiveRecord::Base
   validates :description, presence: true
 
   scope :latest_movies, -> { order ("release_date DESC") }
-  scope :featured_movies, -> { includes(:posters).where(featured: true).order ('updated_at DESC') }
-  scope :top_rated, -> { eager_load(:ratings, :posters).group('ratings.movie_id').order('AVG(ratings.score) DESC') }
+  scope :featured_movies, -> { where(featured: true).order ('updated_at DESC') }
+  scope :top_rated, -> { joins(:ratings).group('ratings.movie_id').order('AVG(ratings.score) DESC') }
   scope :approved, -> { where(approved: true) }
 
   sphinx_scope(:latest) {
@@ -59,19 +59,23 @@ class Movie < ActiveRecord::Base
   end
 
   def self.with_category(params)
+    movie = Movie.includes(:ratings, :posters)
     if params == 'latest'
-      Movie.latest_movies
+      movie = movie.latest_movies
     elsif params == 'featured'
-      Movie.featured_movies
+      movie = movie.featured_movies
     elsif params == 'top_rated_movies'
-      Movie.top_rated
+      movie = movie.top_rated
     else
-      Movie.all
+      movie = movie.all
     end
+    movie.approved
   end
 
   def get_average_rating
-    self.ratings.present? ? self.ratings.average(:score) : 0
+    return 0 unless self.ratings.present?
+    scores = self.ratings.pluck(:score)
+    scores.inject{ |sum, el| sum + el }.to_f / scores.size
   end
 
   def get_ratings(user)
@@ -82,17 +86,25 @@ class Movie < ActiveRecord::Base
     Favorite.exists?(user_id: user_id, movie_id: self.id)
   end
 
+  def self.set_conditions(params)
+    {
+     conditions: {},
+     with: {},
+     order: 'release_date DESC',
+     per_page: 12,
+     page: params[:page],
+     sql: {include: [:posters, :ratings]}
+    }
+  end
+
   def self.search_movies(params)
-    conditions =  {
-                   conditions: {},
-                   with: {},
-                   order: 'release_date DESC',
-                  }
+    conditions = set_conditions(params)
 
     conditions[:conditions][:genre] = params[:genre] if params[:genre].present?
     conditions[:conditions][:actors] = params[:actors] if params[:actors].present?
     conditions[:conditions][:description] = params[:description] if params[:description].present?
     conditions[:with][:release_date] = date_range(params[:start_date], params[:end_date])
+    conditions[:with][:approved] = true
 
     search params[:search], conditions
   end
@@ -128,5 +140,14 @@ class Movie < ActiveRecord::Base
     }
 
     Movie.search(conditions: conditions, with: DEFAULT_SEARCH_FILTER, order: DEFAULT_SEARCH_ORDER)
+  end
+
+  def self.get_movies(params)
+    if params[:search]
+      movies = Movie.search_movies(params)
+    else
+      movies = with_category(params[:filter])
+    end
+    movies = movies.page(params[:page])
   end
 end

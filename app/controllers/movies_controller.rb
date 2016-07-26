@@ -9,18 +9,13 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    if params[:search]
-      @movies = Movie.search_movies(params).latest.approved
-    else
-      @movies = Movie.with_category(params[:filter]).latest_movies.approved
-    end
-    @movies = @movies.page(params[:page])
+    @movies = Movie.get_movies(params)
   end
 
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @reviews = @movie.reviews.select(&:persisted?)
+    @reviews = @movie.reviews.includes(user: :attachment).select(&:persisted?)
     @review = @movie.reviews.build
     @ratings = @movie.ratings
     @rating = @movie.get_ratings(current_user) if user_signed_in?
