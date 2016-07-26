@@ -55,7 +55,7 @@ class Movie < ActiveRecord::Base
 
   def top_poster(style=:medium)
     profile_picture = posters.first
-    profile_picture ? profile_picture.try(:image).url(style) : "#{style.to_s}/missing_poster.png"
+    profile_picture ? profile_picture.image.url(style) : "#{style.to_s}/missing_poster.png"
   end
 
   def self.with_category(params)
