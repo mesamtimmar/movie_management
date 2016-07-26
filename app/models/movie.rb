@@ -3,6 +3,7 @@ class Movie < ActiveRecord::Base
   DEFAULT_SEARCH_FILTER = { approved: true }
   DEFAULT_SEARCH_ORDER = 'updated_at DESC'
   GENRE = %w(Crime Action Thriller Romance Horror)
+  NUMBER_OF_MOVIES_IN_CATEGORY = 4
 
   include ThinkingSphinx::Scopes
   paginates_per 12
@@ -149,5 +150,18 @@ class Movie < ActiveRecord::Base
       movies = with_category(params[:filter])
     end
     movies = movies.page(params[:page])
+  end
+
+  def self.top_movies_of_category(category)
+    movie = Movie.includes(:ratings, :posters)
+    if category == 'latest'
+      movie.latest_movies.approved.first(NUMBER_OF_MOVIES_IN_CATEGORY)
+    elsif category == 'featured'
+      movie.featured_movies.approved.first(NUMBER_OF_MOVIES_IN_CATEGORY)
+    elsif category == 'top_rated_movies'
+      movie.top_rated.approved.first(NUMBER_OF_MOVIES_IN_CATEGORY)
+    else
+      movie.all
+    end
   end
 end

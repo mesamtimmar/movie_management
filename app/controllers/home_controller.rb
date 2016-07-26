@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
 
   def index
-    @latest = Movie.latest_movies.approved.first(4)
-    @featured = Movie.featured_movies.approved.first(4)
-    @top_rated_movies = Movie.top_rated.approved.first(4)
+    @latest = Movie.top_movies_of_category('latest')
+    @featured = Movie.top_movies_of_category('featured')
+    @top_rated_movies = Movie.top_movies_of_category('top_rated_movies')
   end
 end
