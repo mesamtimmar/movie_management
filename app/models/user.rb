@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :reported_reviews, dependent: :destroy
   has_many :ratings, dependent: :destroy
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :favorite_movies, class_name: 'Movie', through: :favorites, source: :movie
 
   validates :email, presence: true, uniqueness: true, length: { maximum: 100 }
