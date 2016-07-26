@@ -1,20 +1,26 @@
 class Movie < ActiveRecord::Base
+
   DEFAULT_SEARCH_FILTER = { approved: true }
   DEFAULT_SEARCH_ORDER = 'updated_at DESC'
+  GENRE = %w(Crime Action Thriller Romance Horror)
+
   include ThinkingSphinx::Scopes
   paginates_per 12
+
   has_many :posters, class_name: "Attachment", as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :posters, allow_destroy: true
   has_many :casts
   has_many :actors, through: :casts, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  accepts_nested_attributes_for :posters, allow_destroy: true
+
   validates :title, presence: true, uniqueness: true, length: { maximum: 150 }
   validates :genre, presence: true, length: { maximum: 30 }
   validates :trailer, presence: true
   validates :description, presence: true
+
   scope :latest_movies, -> { order ("release_date DESC") }
   scope :featured_movies, -> { includes(:posters).where(featured: true).order ('updated_at DESC') }
   scope :top_rated, -> { eager_load(:ratings, :posters).group('ratings.movie_id').order('AVG(ratings.score) DESC') }
@@ -29,8 +35,6 @@ class Movie < ActiveRecord::Base
   sphinx_scope(:featured) {
     { with: { featured: true} }
   }
-
-  GENRE = %w(Crime Action Thriller Romance Horror)
 
   def show_description
     self.description.to_s.html_safe
