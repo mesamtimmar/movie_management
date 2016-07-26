@@ -15,7 +15,7 @@ class Movie < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
-  accepts_nested_attributes_for :posters, allow_destroy: true
+  accepts_nested_attributes_for :posters, allow_destroy: true, reject_if: proc { |attributes| attributes['image'].blank? }
 
   validates :title, presence: true, uniqueness: true, length: { maximum: 150 }
   validates :genre, presence: true, length: { maximum: 30 }
