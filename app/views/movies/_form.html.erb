@@ -18,7 +18,7 @@
 
   <div class='form-group'>
     <%= f.label :genre %>
-    <%= f.select :genre, options_for_select(Movie::GENRE, selected: @movie.genre), class: 'form-control' %>
+    <%= f.select :genre, options_for_select(Movie::GENRE, selected: @movie.genre), class: 'form-control', required: true %>
   </div>
 
   <div class='form-group'>
@@ -33,12 +33,12 @@
 
   <div class='form-group'>
     <%= f.label :trailer %>
-    <%= f.text_field :trailer, placeholder: 'Trailer Embed', class: 'form-control' %>
+    <%= f.text_field :trailer, placeholder: 'Trailer Embed', class: 'form-control', required: true %>
   </div>
 
   <div class='form-group'>
     <%= f.label :description %>
-    <%= f.cktext_area :description, required: true, maxlength: 1200 %>
+    <%= f.cktext_area :description, required: true %>
   </div>
 
   <%= f.fields_for :posters do |poster| %>

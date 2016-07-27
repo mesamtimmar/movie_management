@@ -18,7 +18,7 @@ class Movie < ActiveRecord::Base
   accepts_nested_attributes_for :posters, allow_destroy: true, reject_if: proc { |attributes| attributes['image'].blank? }
 
   validates :title, presence: true, uniqueness: true, length: { maximum: 150 }
-  validates :genre, presence: true, length: { maximum: 30 }
+  validates :genre, presence: true, length: { maximum: 50 }
   validates :trailer, presence: true
   validates :description, presence: true
 
