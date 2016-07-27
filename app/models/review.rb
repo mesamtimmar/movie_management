@@ -2,7 +2,7 @@ class Review < ActiveRecord::Base
   belongs_to :user
   belongs_to :movie
   has_many :reported_reviews, dependent: :destroy
-  validates :comment, presence: true, length: { maximum: 2000, minimum: 5 }
+  validates :comment, presence: true, length: { maximum: 500, minimum: 5 }
   validates :user_id, presence: true
   validates :movie_id, presence: true
 
