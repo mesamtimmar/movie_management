@@ -6,29 +6,39 @@
   <div class='panel-body'>
     <%= form_tag movies_path, method: :get, class: 'form-inline' do %>
       <div class='col-md-11 col-md-offset-1'>
-        <div class='form-group'>
-          <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Key Word' %>
-        </div>
+        <div class='row'>
+          <div class='form-group col-md-4'>
+            <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Key Word' %>
+          </div>
 
-        <div class='form-group'>
-          <%= select_tag :genre, options_for_select(Movie::GENRE), class: 'form-control' %>
-        </div>
+          <div class='form-group col-md-3'>
+            <%= select_tag :genre, options_for_select(Movie::GENRE), class: 'form-control', prompt: 'select genre' %>
+          </div>
 
-        <div class='form-group'>
-          <%= text_field_tag :actors, params[:actors], class: 'form-control', placeholder: 'Actor' %>
+          <div class='form-group col-md-3'>
+            <%= text_field_tag :actors, params[:actors], class: 'form-control', placeholder: 'Actor' %>
+          </div>
         </div>
-
-        <div class='clearfix'></div>
 
         <div class='row margin-top-class-10'>
           <div class='col-md-12'>
-            <div class='form-group'>
+            <div class='form-group col-md-5'>
               <strong>Start Date</strong>
               <%= date_field_tag :start_date, params[:start_date], class: 'form-control', placeholder: 'Search By Start Date' %>
+            </div>
+
+            <div class='form-group col-md-5'>
               <strong>Last Date</strong>
               <%= date_field_tag :end_date, params[:end_date], class: 'form-control', placeholder: 'Search By End' %>
             </div>
-            <%= submit_tag 'Search', class: 'btn btn-primary' %>
+          </div>
+        </div>
+
+        <div class='row margin-top-class-10'>
+          <div class='col-md-12'>
+            <div class='form-group col-md-5 col-md-offset-2'>
+              <%= submit_tag 'Search', class: 'btn btn-primary btn-block' %>
+            </div>
           </div>
         </div>
       </div>
