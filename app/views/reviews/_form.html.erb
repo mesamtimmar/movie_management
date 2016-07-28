@@ -12,16 +12,16 @@
   <% end %>
 
   <div class='row'>
-    <div class='field col-md-4'>
+    <div class='field col-md-8 col-md-offset-1'>
       <%= f.text_area :comment, required: true, placeholder: 'Your review', minlength: 5, maxlength: 500, class: 'form-control', id: 'review_text' %>
       <div id='review_error'></div>
     </div>
   </div>
 
   <div class='row'>
-    <div class='field col-md-4'>
+    <div class='field col-md-1 col-md-offset-8'>
       <div class='actions'>
-        <%= f.submit 'Add', class: 'btn btn-default'  %>
+        <%= f.submit 'Add', class: 'btn btn-primary'  %>
       </div>
     </div>
   </div>
