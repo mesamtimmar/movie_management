@@ -36,7 +36,7 @@ $(document).on 'ready page:load', ->
             score: score
           dataType: 'json'
           success: (data) ->
-            set_average(data.rating.score)
+            set_average(data.average)
       else
         $.ajax
           type: 'PATCH'
