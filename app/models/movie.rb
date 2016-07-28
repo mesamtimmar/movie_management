@@ -156,7 +156,7 @@ class Movie < ActiveRecord::Base
     elsif category == 'top_rated_movies'
       movies.top_rated.approved.first(NUMBER_OF_MOVIES_IN_CATEGORY)
     else
-      movies.all
+      movies.latest_movies.approved
     end
   end
 end
