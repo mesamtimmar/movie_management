@@ -1,6 +1,6 @@
 class Movie < ActiveRecord::Base
 
-  GENRE = %w(Crime Action Thriller Romance Horror)
+  GENRE = %w(Crime Action Thriller Romance Horror Comedy Drama Adventure Fantasy Family Sci-Fi War History)
   NUMBER_OF_MOVIES_IN_CATEGORY = 4
 
   include ThinkingSphinx::Scopes
