@@ -60,17 +60,15 @@ class Movie < ActiveRecord::Base
   end
 
   def self.with_category(params)
-    movie = Movie.includes(:ratings, :posters)
-    if params == 'latest'
-      movie = movie.latest_movies
-    elsif params == 'featured'
-      movie = movie.featured_movies
+    movies = Movie.includes(:ratings, :posters)
+    if params == 'featured'
+      movies = movies.featured_movies
     elsif params == 'top_rated_movies'
-      movie = movie.top_rated
+      movies = movies.top_rated
     else
-      movie = movie.all
+      movies = movies.latest_movies
     end
-    movie.approved
+    movies.approved
   end
 
   def get_average_rating
@@ -153,15 +151,15 @@ class Movie < ActiveRecord::Base
   end
 
   def self.top_movies_of_category(category)
-    movie = Movie.includes(:ratings, :posters)
+    movies = Movie.includes(:ratings, :posters)
     if category == 'latest'
-      movie.latest_movies.approved.first(NUMBER_OF_MOVIES_IN_CATEGORY)
+      movies.latest_movies.approved.first(NUMBER_OF_MOVIES_IN_CATEGORY)
     elsif category == 'featured'
-      movie.featured_movies.approved.first(NUMBER_OF_MOVIES_IN_CATEGORY)
+      movies.featured_movies.approved.first(NUMBER_OF_MOVIES_IN_CATEGORY)
     elsif category == 'top_rated_movies'
-      movie.top_rated.approved.first(NUMBER_OF_MOVIES_IN_CATEGORY)
+      movies.top_rated.approved.first(NUMBER_OF_MOVIES_IN_CATEGORY)
     else
-      movie.all
+      movies.all
     end
   end
 end
