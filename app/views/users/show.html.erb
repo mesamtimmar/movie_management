@@ -1,48 +1,46 @@
 <div class='row'>
-  <div class='col-md-12'>
+  <div class='col-md-8 col-md-offset-2'>
     <div class='panel panel-default'>
       <div class='panel-heading'>
-        <h1 align='center'>View Profile</h1>
+        <h1 align='center'>Your Profile</h1>
       </div>
       <div class='panel-body'>
         <div class='row'>
-          <div class='col-md-2'></div>
 
-          <div class='col-md-2'>
+          <div class='col-md-4'>
             <%= image_tag @user.show_profile_picture(:medium), class: 'img-responsive' %>
           </div>
 
-          <div class='col-md-6'>
+          <div class='col-md-8'>
             <strong>Name:</strong>
-              <%= @user.full_name %>
+            <%= @user.full_name %>
+
             <div class='newline'>
               <strong>Email:</strong>
               <%= @user.email %>
             </div>
-          </div>
 
-          <div class='col-md-2'></div>
+            <div>
+              <%= link_to 'Edit profile', edit_user_registration_path, class: 'btn btn-primary link-color' %>
+            </div>
+          </div>
         </div>
 
         <div class='row'>
-          <div class='col-md-2'></div>
-
-          <div class='col-md-8'>
-            <h1 align='center'>Favorite Movies</h1>
+          <div class='col-md-12'>
+            <h2 align='center'>Favorite Movies</h2>
             <div class='row'>
               <% @favorite_movies.each do |favorite| %>
                 <div class='col-sm-3 col-lg-3 col-md-3'>
                   <%= link_to movie_path(favorite.id) do %>
                     <div class='thumbnail hvr-float'>
-                      <p><%= image_tag favorite.top_poster(:medium), class:'poster-image' %></p>
+                      <p><%= image_tag favorite.top_poster(:medium), class: 'poster-image' %></p>
 
-                      <div class='caption movie_caption'>
+                      <div class='caption movie-caption text-center'>
                         <%= favorite.title %>
                       </div>
 
-                      <div class='movie_description'>
-                        <%= favorite.show_description %>
-                      </div>
+                      <div class='avg-star-rating text-center' data-score=<%= favorite.get_average_rating %> ></div>
                     </div>
                   <% end %>
                 </div>
