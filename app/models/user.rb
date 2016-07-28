@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
     profile_picture = self.attachment
     profile_picture ? profile_picture.try(:image).url(style) : "#{style.to_s}/missing.png"
   end
+
+  def self.get_favorite_movies(user,params)
+    user.favorite_movies.includes(:ratings, :posters).page(params[:page])
+  end
 end
