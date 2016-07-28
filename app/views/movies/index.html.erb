@@ -1,6 +1,13 @@
 <div class='row'>
-
   <div class='col-md-8 col-md-offset-2'>
+    <div class='row'>
+      <div class='col-md-offset-10 col-md-2'>
+        <div class='pull-right btn btn-sm btn-primary' id='advance_search_btn'>
+          Advance Filters
+        </div>
+      </div>
+    </div>
+
     <div class='row'>
       <div class='col-md-12'>
         <div id='advance_search_form'>
@@ -9,27 +16,33 @@
       </div>
     </div>
 
-    <div class='row'>
-      <div class='col-md-12'>
-        <h1>Listing Movies</h1>
-        <div class="row">
-          <% @movies.each do |movie| %>
-            <div class='col-sm-3'>
-              <%= link_to movie do %>
-                <div class='thumbnail hvr-float'>
-                  <p><%= image_tag movie.top_poster(:medium), class:'poster-image' %></p>
+    <div class='panel panel-default'>
+      <div class='panel-heading'>
+        <h1 align='center'>Listing Movies</h1>
+      </div>
+      <div class='panel-body'>
+        <div class='row'>
+          <div class='col-md-12'>
+            <div class="row">
+              <% @movies.each do |movie| %>
+                <div class='col-sm-3'>
+                  <%= link_to movie do %>
+                    <div class='thumbnail hvr-float'>
+                      <p><%= image_tag movie.top_poster(:medium), class: 'poster-image' %></p>
 
-                  <div class='caption movie-caption text-center'>
-                    <%= movie.title %>
-                  </div>
+                      <div class='caption movie-caption text-center'>
+                        <%= movie.title %>
+                      </div>
 
-                  <div class='avg-star-rating text-center' data-score=<%= movie.get_average_rating %> ></div>
+                      <div class='avg-star-rating text-center' data-score=<%= movie.get_average_rating %> ></div>
+                    </div>
+                  <% end %>
                 </div>
               <% end %>
             </div>
-          <% end %>
+            <%= paginate @movies %>
+          </div>
         </div>
-        <%= paginate @movies %>
       </div>
     </div>
   </div>

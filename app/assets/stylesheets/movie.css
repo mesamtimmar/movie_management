@@ -95,10 +95,15 @@
   display: none;
 }
 
+#advance_search_btn {
+  margin-bottom: 10px;
+}
+
 .margin-top-class-10 {
   margin-top: 10px;
 }
 
 .link-color {
-    color: #fff !important;
+  color: #fff !important;
+  font-size: 12px !important;
 }
