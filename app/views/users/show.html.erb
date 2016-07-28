@@ -12,17 +12,15 @@
           </div>
 
           <div class='col-md-8'>
-            <strong>Name:</strong>
+            <h2 class='h2-style'>Name:</h2>
             <%= @user.full_name %>
 
-            <div class='newline'>
-              <strong>Email:</strong>
-              <%= @user.email %>
-            </div>
+            <div class='clearfix'></div>
+            <h2 class='h2-style'>Email:</h2>
+            <%= @user.email %>
 
-            <div>
-              <%= link_to 'Edit profile', edit_user_registration_path, class: 'btn btn-primary link-color' %>
-            </div>
+            <div class='clearfix'></div>
+            <%= link_to 'Edit profile', edit_user_registration_path, class: 'btn btn-primary link-color' %>
           </div>
         </div>
 
