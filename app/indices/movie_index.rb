@@ -1,4 +1,4 @@
-ThinkingSphinx::Index.define :movie, with: :active_record do
+ThinkingSphinx::Index.define :movie, delta: true, with: :active_record do
   indexes title, sortable: true
   indexes description
   indexes actors.name , as: :actors
