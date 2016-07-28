@@ -75,10 +75,8 @@
 #poster {
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
-  width: 43em;
+  width: 100%;
   overflow-x: auto;
   white-space: nowrap;
 }
@@ -106,4 +104,14 @@
 .link-color {
   color: #fff !important;
   font-size: 12px !important;
+}
+
+.h2-style {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
