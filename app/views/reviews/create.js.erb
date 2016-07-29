@@ -2,6 +2,6 @@
   $('#review_error').html("<ul><% @created_review.errors.full_messages.each do |message| %><li class='btn btn-warning'><%= message %></li><% end %></ul>");
   $('#review_error').show();
 <% else %>
-  $('#review-list').append("<%= j render @created_review %>");
+  $('#review-list').prepend("<%= j render @created_review %>");
   $('#review-container').html("<%= j render('form') %>");
 <% end %>

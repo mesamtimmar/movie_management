@@ -6,6 +6,8 @@ class Review < ActiveRecord::Base
   validates :user_id, presence: true
   validates :movie_id, presence: true
 
+  scope :decending_order, -> { order ("created_at DESC") }
+
   def show_user_dp(style = :original)
     self.user.show_profile_picture(style)
   end
