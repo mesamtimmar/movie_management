@@ -23,7 +23,7 @@
 
   <div class='form-group'>
     <%= f.label :duration %> (Minutes)
-    <%= f.number_field :duration, required: true, class: 'form-control' %>
+    <%= f.number_field :duration, min: '0', required: true, class: 'form-control' %>
   </div>
 
   <div class='form-group'>
