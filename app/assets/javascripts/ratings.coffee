@@ -37,6 +37,7 @@ $(document).on 'ready page:load', ->
           dataType: 'json'
           success: (data) ->
             set_average(data.average)
+            $('#movie-container').data 'rating', data.id
       else
         $.ajax
           type: 'PATCH'
