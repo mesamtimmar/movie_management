@@ -21,8 +21,10 @@ class Movie < ActiveRecord::Base
   validates :description, presence: true
 
   scope :latest_movies, -> { order ("release_date DESC") }
+  scope :release_date_ascending, -> { order ('release_date ASC') }
   scope :featured_movies, -> { where(featured: true).order ('updated_at DESC') }
   scope :top_rated, -> { joins(:ratings).group('movie_id').order('AVG(ratings.score) DESC') }
+  scope :rating_ascending, -> { joins(:ratings).group('movie_id').order('AVG(ratings.score) ASC') }
   scope :approved, -> { where(approved: true) }
 
   sphinx_scope(:latest) {
@@ -61,8 +63,12 @@ class Movie < ActiveRecord::Base
     movies = Movie.includes(:ratings, :posters)
     if params == 'featured'
       movies = movies.featured_movies
-    elsif params == 'top_rated_movies'
+    elsif params == 'top_rated_movies' || params == 'rating_descending'
       movies = Movie.top_rated
+    elsif params == 'rating_ascending'
+      movies = Movie.rating_ascending
+    elsif params == 'release_date_ascending'
+      movies = movies.release_date_ascending
     else
       movies = movies.latest_movies
     end
