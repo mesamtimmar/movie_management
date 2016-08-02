@@ -45,8 +45,8 @@ class Movie < ActiveRecord::Base
     self.trailer.to_s.html_safe
   end
 
-  def actor_names
-    self.actors.pluck(:name).join(', ')
+  def cast
+    self.actors
   end
 
   def duration_in_hour_minutes

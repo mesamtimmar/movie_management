@@ -1,0 +1,13 @@
+<div class='modal fade' id='imagemodal'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-body'>
+        <%= button_tag(type: 'button', class: 'btn btn-primary close', 'data-dismiss' => 'modal') do %>
+          <span aria-hidden='true'>&times;</span>
+          <span class='sr-only'>Close</span>
+        <% end %>
+        <%= image_tag '', class: 'imagepreview' %>
+      </div>
+    </div>
+  </div>
+</div>

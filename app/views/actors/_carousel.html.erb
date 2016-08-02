@@ -1,0 +1,18 @@
+<div id='carousel-example-generic' class='carousel slide' data-ride='carousel' data-interval='3000'>
+  <div class='carousel-inner'>
+    <div class='item active pop'>
+        <%= image_tag images.first.image.url(:medium), class: 'img-responsive' %>
+    </div>
+    <% images[1..images.count].each do |attachment| %>
+      <div class='item pop'>
+        <%= image_tag attachment.image.url(:medium), class: 'img-responsive' %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to '#carousel-example-generic', class: 'left carousel-control', 'data-slide' => 'prev' do %>
+    <span class='glyphicon glyphicon-chevron-left'></span>
+  <% end %>
+  <%= link_to '#carousel-example-generic', class: 'right carousel-control', 'data-slide' => 'next' do %>
+    <span class='glyphicon glyphicon-chevron-right'></span>
+  <% end %>
+</div>

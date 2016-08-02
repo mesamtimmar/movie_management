@@ -115,3 +115,26 @@
   margin-top: 10px;
   margin-bottom: 0px;
 }
+
+.actor-link:hover{
+  text-decoration: none !important;
+  background-color: #fff !important;
+  color: #428bca !important;
+}
+
+.carousel-inner > .item > img {
+ margin: auto;
+}
+
+.imagepreview {
+ width:100%;
+}
+
+#carousel-for-actors {
+ width: 61%;
+}
+
+.modal-content {
+  width: 60%;
+  left: 25%;
+}

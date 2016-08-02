@@ -50,7 +50,11 @@
 
           <div id='cast'>
             <h2 class='h2-style'>Cast:</h2>
-            <p><%= @movie.actor_names %></p>
+            <p>
+              <% @movie.cast.each do |actor| %>
+                <%= link_to actor.name, actor, class: 'actor-link' %>
+              <% end %>
+            </p>
           </div>
         </div>
 
