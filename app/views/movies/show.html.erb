@@ -64,7 +64,10 @@
           </div>
 
           <div id='poster'>
-            <%= render partial: 'posters', collection: @posters, as: :poster %>
+            <% unless @posters.empty? %>
+              <%= render 'actors/carousel', images: @posters %>
+              <%= render 'actors/modal' %>
+            <% end %>
           </div>
 
           <div class='clearfix'></div>
